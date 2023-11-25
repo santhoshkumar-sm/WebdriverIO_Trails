@@ -22,7 +22,7 @@ describe("Random Application", async () => {
     // console.log(await $(".alert-danger").getText());
   });
 
-  it("Successful login test", async () => {
+  xit("Login test success flow", async () => {
     await browser.url("https://rahulshettyacademy.com/loginpagePractise/");
     await $("#username").setValue("rahulshettyacademy");
     await $("//input[@type='password']").setValue("learning");
@@ -30,5 +30,19 @@ describe("Random Application", async () => {
     await $(".btn-primary").waitForExist();
     await expect(browser).toHaveUrlContaining("shop");
     await expect(browser).toHaveTitle("ProtoCommerce");
+  });
+
+  it("Handling radio buttons and static dropdowns", async () => {
+    await browser.url("https://rahulshettyacademy.com/loginpagePractise/");
+    await $("#username").setValue("rahulshettyacademy");
+    await $("//input[@type='password']").setValue("learning");
+    await $$(".customradio")[1].$(".radiotextsty").click();
+    await (await $(".modal-body")).waitForDisplayed();
+    await $("#cancelBtn").click();
+    console.log(await (await $$(".customradio")[0].$("span")).isSelected());
+    let occupationDropdown = await $("select.form-control");
+    occupationDropdown.selectByIndex(1);
+    occupationDropdown.selectByVisibleText("Consultant");
+    occupationDropdown.selectByAttribute("value", "stud");
   });
 });
