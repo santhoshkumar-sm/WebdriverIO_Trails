@@ -1,3 +1,5 @@
+import { expect as chaiExpect } from "chai";
+
 describe("Random Application", async () => {
   xit("Login page test", async () => {
     await browser.url("https://www.google.com");
@@ -43,6 +45,10 @@ describe("Random Application", async () => {
     let occupationDropdown = await $("select.form-control");
     occupationDropdown.selectByIndex(1);
     occupationDropdown.selectByVisibleText("Consultant");
-    occupationDropdown.selectByAttribute("value", "stud");
+    // occupationDropdown.selectByAttribute("value", "stud");
+    await browser.pause(2000);
+    console.log(await occupationDropdown.getValue());
+
+    chaiExpect(await occupationDropdown.getValue()).to.equal("consult");
   });
 });
